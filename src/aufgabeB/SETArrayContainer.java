@@ -1,30 +1,33 @@
-package aufgabeA;
-import core.*;
+package aufgabeB;
 
-/**
- * Beschreibt eine Menge als Array
- * @author Philip Zirfaß, Lars Kowoll
- *
- */
-public class SETArray implements SET {
+import aufgabeA.POSArray;
+import aufgabeA.SETArray;
+import core.ELEM;
+import core.KEY;
+import core.POS;
+import core.SET;
+
+public class SETArrayContainer implements SET{
 	
 	private ELEM[] set;
 	private int _numberOfElements;
 	private int _lengthArray;
 	
-	public SETArray() {
+
+	public SETArrayContainer() {
 		_lengthArray = 10;
 		_numberOfElements = 0;
 		set = new ELEM[_lengthArray];
 	}
+		
 
 	@Override
-	public POSArray add(ELEM elem) {
+	public POSArrayContainer add(ELEM elem) {
 		assert elem != null;
 		
 		for (ELEM e: set) { // Es wird geprüft ob Element schon im Array vorhanden ist
 			if(elem.equals(e)) {
-				return ((POSArray) find(elem.getKey())).getPOSArray();
+				return ((POSArrayContainer) find(elem.getKey())).getPOSArrayContainer();
 			}
 		}
 		
@@ -43,10 +46,10 @@ public class SETArray implements SET {
 			set[_numberOfElements] = elem;
 		}
 		
-		POSArray POSArray = new POSArray(_numberOfElements); // Die entsprechene POS Klasse wird erzeugt
-		return POSArray;
+		POSArrayContainer POSArrayContainer = new POSArrayContainer(_numberOfElements); // Die entsprechene POS Klasse wird erzeugt
+		return POSArrayContainer;
 	}
-
+	    
 	@Override
 	public void delete(POS pos) {
 		assert pos != null;

@@ -1,5 +1,10 @@
 package core;
 
+/**
+ * Beschreibt die abstrakten Methoden einer Menge
+ * @author Philip Zirfaß, Lars Kowoll
+ *
+ */
 public interface SET {
 	/**
 	 * Fügt ein neues Element der Menge hinzu
@@ -52,4 +57,5 @@ public interface SET {
 	 * @return Vereinigte Menge
 	 */
 	SET unify(SET s, SET t);
+
 }

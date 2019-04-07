@@ -1,5 +1,10 @@
 package core;
 
+/**
+ * Die Klasse beschreibt einen Schlüssel. Jeder Schlüssel ist eindeutig.
+ * @author Philip Zirfaß, Lars Kowoll
+ *
+ */
 public class KEY {
 	
 	int _value;
