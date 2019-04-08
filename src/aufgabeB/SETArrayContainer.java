@@ -1,7 +1,7 @@
 package aufgabeB;
 
-import aufgabeA.POSArray;
-import aufgabeA.SETArray;
+import aufgabeB.POSArrayContainer;
+import aufgabeB.SETArrayContainer;
 import core.ELEM;
 import core.KEY;
 import core.POS;
@@ -12,6 +12,8 @@ public class SETArrayContainer implements SET{
 	private ELEM[] set;
 	private int _numberOfElements;
 	private int _lengthArray;
+	private int _counterPos;
+	private int _counterKey;
 	
 
 	public SETArrayContainer() {
@@ -51,11 +53,11 @@ public class SETArrayContainer implements SET{
 	}
 	    
 	@Override
-	public void delete(POS pos) {
+	public int delete(POS pos) {
 		assert pos != null;
         assert _numberOfElements >=0;
         
-        POSArray posit = (POSArray) pos;
+        POSArrayContainer posit = (POSArrayContainer) pos;
         if(_numberOfElements > 0)
         {
             for (int i = posit.getPOS(); i <= _numberOfElements -1; i++)
@@ -64,19 +66,27 @@ public class SETArrayContainer implements SET{
                 {
                     set[i] = set[i + 1];
                 }
+                _counterPos++;
             }
             set[_numberOfElements] = null;
             _numberOfElements--;
         }
-		
+        int tempcounterPos = _counterPos;
+        _counterPos = 0;
+        return tempcounterPos;
 	}
 
 	@Override
-	public void delete(KEY key) {
+	public int delete(KEY key) {
 		assert key != null;
 		assert _numberOfElements >=0;
 		
-		delete(find(key));	
+		int counter = 0;
+		
+		counter = delete(find(key));	
+		int tempCounterKey = _counterKey;
+		_counterKey = 0;
+		return counter + tempCounterKey;
 	}
 
 	@Override
@@ -84,7 +94,7 @@ public class SETArrayContainer implements SET{
 		assert key != null;
 		
 		ELEM element = new ELEM(key);
-        POSArray POSition = new POSArray(0);
+        POSArrayContainer POSition = new POSArrayContainer(0);
         set[0] = element;
         
         for(int i=_numberOfElements; i>0; i--)
@@ -92,8 +102,10 @@ public class SETArrayContainer implements SET{
             if(set[i].equals(set[0]))
             { 
                 POSition.newPosition(i);
+                _counterKey++;
                 return POSition;
-            }                
+            }
+            _counterKey++;               
         }
         return POSition;
 	}
@@ -103,7 +115,7 @@ public class SETArrayContainer implements SET{
 		assert pos != null;
         assert pos.isValid() == true;
         
-        POSArray position = (POSArray) pos;
+        POSArrayContainer position = (POSArrayContainer) pos;
         return set[position.getPOS()];
 	}
 
@@ -127,8 +139,8 @@ public class SETArrayContainer implements SET{
         int sizeS = s.size();
         int sizeT = t.size();
         
-        SETArray sSetArray = (SETArray) s;
-        SETArray tSetArray = (SETArray) t;
+        SETArrayContainer sSetArray = (SETArrayContainer) s;
+        SETArrayContainer tSetArray = (SETArrayContainer) t;
         
         if (sizeS > sizeT) {
         	for(int i = 1; i<=sizeT; i++)
@@ -145,8 +157,7 @@ public class SETArrayContainer implements SET{
         }
 	}
 	
-	private ELEM getElem(int index)
-    {
+	private ELEM getElem(int index) {
         return set[index];
     }
 

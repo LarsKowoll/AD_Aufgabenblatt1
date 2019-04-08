@@ -17,7 +17,7 @@ public class POSArray implements POS {
      * @param Position
      */
     public POSArray(int p) {
-        positionArray= this;
+        positionArray = this;
         position = p;
         
         if(p <= 0) {

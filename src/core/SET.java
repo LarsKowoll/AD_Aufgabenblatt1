@@ -16,14 +16,15 @@ public interface SET {
 	/**
 	 * Löscht ein Element an einer bestimmten Position
 	 * @param pos Position	
+	 * @return 
 	 */
-	void delete(POS pos);
+	int delete(POS pos);
 	
 	/**
 	 * Löscht ein Element das mit dem Schlüssel verbunden ist
 	 * @param key Schlüssel
 	 */
-	void delete(KEY key);
+	int delete(KEY key);
 	
 	/**
 	 * Sucht mit Hilfe des Schlüssels die Position

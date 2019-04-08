@@ -11,11 +11,15 @@ public class SETArray implements SET {
 	private ELEM[] set;
 	private int _numberOfElements;
 	private int _lengthArray;
+	private int _counterPos;
+	private int _counterKey;
 	
 	public SETArray() {
 		_lengthArray = 10;
 		_numberOfElements = 0;
 		set = new ELEM[_lengthArray];
+		_counterPos = 0;	
+		_counterKey = 0;
 	}
 
 	@Override
@@ -48,32 +52,38 @@ public class SETArray implements SET {
 	}
 
 	@Override
-	public void delete(POS pos) {
+	public int delete(POS pos) {
 		assert pos != null;
         assert _numberOfElements >=0;
         
         POSArray posit = (POSArray) pos;
-        if(_numberOfElements > 0)
-        {
+        if(_numberOfElements > 0) {
             for (int i = posit.getPOS(); i <= _numberOfElements -1; i++)
             {
-                if (i >= posit.getPOS())
-                {
+                if (i >= posit.getPOS())  {
                     set[i] = set[i + 1];
                 }
+                _counterPos++;
             }
             set[_numberOfElements] = null;
             _numberOfElements--;
         }
+        int tempcounterPos = _counterPos;
+        _counterPos = 0;
+        return tempcounterPos;
 		
 	}
 
 	@Override
-	public void delete(KEY key) {
+	public int delete(KEY key) {
+		int counter = 0;
 		assert key != null;
 		assert _numberOfElements >=0;
 		
-		delete(find(key));	
+		counter = delete(find(key));
+		int tempCounterKey = _counterKey;
+		_counterKey = 0;
+		return counter + tempCounterKey;
 	}
 
 	@Override
@@ -89,8 +99,10 @@ public class SETArray implements SET {
             if(set[i].equals(set[0]))
             { 
                 POSition.newPosition(i);
+                _counterKey++;
                 return POSition;
-            }                
+            } 
+            _counterKey++;
         }
         return POSition;
 	}

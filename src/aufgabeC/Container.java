@@ -8,28 +8,28 @@ public class Container {
     private Container _nextContainer;
 
     
-    Container(ELEM e, Container nextContainer) {
+    public Container(ELEM e, Container nextContainer) {
     	_elem = e;
         _nextContainer = nextContainer;
     }
 
-    ELEM getElement() {
+    public ELEM getElement() {
         return _elem;
     }
 
-    void setElement(ELEM elem) {
+    public void setElement(ELEM elem) {
     	_elem = elem;
     }
     
-    Container getNextContainer() {
+    public Container getNextContainer() {
         return _nextContainer;
     }
 
-    void setNextContainer(Container nextContainer) {
+    public void setNextContainer(Container nextContainer) {
         _nextContainer = nextContainer;
     }
 
-    int getSize()  {
+    public int getSize()  {
         if (_elem == null) {
             return 0;
         } else {

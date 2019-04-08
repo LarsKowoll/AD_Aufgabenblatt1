@@ -19,5 +19,19 @@ public class ELEM {
 	public KEY getKey() {
 		return _key;
 	}
+	
+	@Override
+    public boolean equals(Object obj) {
+       if(obj instanceof ELEM) {
+           ELEM other = (ELEM)obj;
+           return other.getKey().equals(_key);
+       }
+       return false;
+    }
+    
+    @Override
+    public int hashCode()  {
+        return _key.hashCode();
+    }
 
 }

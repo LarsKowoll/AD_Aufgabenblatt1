@@ -12,15 +12,15 @@ import aufgabeA.SETArray;
 import aufgabeB.SETArrayContainer;
 import aufgabeC.SETContainer;
 
-public class Verifikationstests
+public class VerifikationTest
 {
     private SET _testSET;
 	
 	private SET getSetImplementation(){
-	    return new SETContainer();
+	    return new SETArrayContainer();
 	}
 	
-    public Verifikationstests() {
+    public VerifikationTest() {
         _testSET = getSetImplementation();
 
     }

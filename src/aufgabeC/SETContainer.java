@@ -9,12 +9,16 @@ public class SETContainer implements SET
 {
     Container _head;
     Container _tail;
+    public int _counterPos;
+	public int _counterKey;
 
     public SETContainer()
     {
         _tail = new Container(null, null);
         _head = new Container(null, _tail);
         _tail.setNextContainer(_head);
+        _counterPos = 0;
+        _counterKey = 0;
     }
 
     @Override
@@ -34,7 +38,7 @@ public class SETContainer implements SET
     }
 
     @Override
-    public void delete(POS position)  {
+    public int delete(POS position)  {
         assert position != null;
         assert position.isValid();
         
@@ -42,25 +46,31 @@ public class SETContainer implements SET
         Container afterCont = ((POSContainer) position).getContainer().getNextContainer().getNextContainer(); 
 
         prevCont.setNextContainer(afterCont); 
+        _counterPos++;
 
         if (afterCont == _tail) {
             _tail.setNextContainer(prevCont);
         }
+        int tempCounterPos = _counterPos;
+        _counterPos = 0;
+        return tempCounterPos;
     }
 
    @Override
-    public void delete(KEY key) {
+    public int delete(KEY key) {
         assert key != null;
-        
+        int counter = 0;
         POS pos = find(key);
         if (pos.isValid()) {
-            delete(pos);
+            counter = delete(pos);
         }
+        int tempCounterKey = _counterKey;
+        return counter + tempCounterKey;
     }
 
     @Override
-    public POS find(KEY key)
-    {
+    public POS find(KEY key)  {
+    	_counterKey = 0;
         assert key != null;
         
         ELEM stopperElem = new ELEM(key);
@@ -70,6 +80,7 @@ public class SETContainer implements SET
 
         while (!(cont.getNextContainer().getElement().equals(stopperElem))) {
             cont = cont.getNextContainer();
+            _counterKey++;
         }
 
         _tail.setElement(null);
